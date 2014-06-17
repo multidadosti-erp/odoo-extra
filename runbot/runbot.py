@@ -971,8 +971,8 @@ class RunbotController(http.Controller):
 
 
 LABELS = {
-    1: 'WIP',
-    2: 'RD',
+    1: 'RDWIP',
+    2: 'OE',
 }
 
 # kill ` ps faux | grep ./static  | awk '{print $2}' `
