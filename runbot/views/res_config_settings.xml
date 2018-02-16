@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_runbot_configuration" model="ir.ui.view">
+        <field name="name">Configure Runbot</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('settings')]" position="inside">
+            <div class="app_settings_block" data-string="Runbot Settings" string="Runbot Settings" data-key="runbot_settings">
+
+                <div id="runbot_parameters">
+                    <h2>Runbot Parameters</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label string="Workers"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="text-muted">
+                                    Set the works numbers
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16 row">
+                                        <label for="workers" string="Workers" class="col-xs-3 col-md-3 o_light_label"/>
+                                        <field name="workers" class="oe_inline" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label string="Running Builds"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="text-muted">
+                                    Set the max number of running buids
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16" groups="base.group_no_one">
+                                        <label for="running_max" string="Max builds" class="col-xs-3 col-md-3 o_light_label"/>
+                                        <field name="running_max" class="oe_inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label string="Timeout"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="text-muted">
+                                    Set build timeout
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16 row">
+                                        <label for="timeout" string="Timeout" class="col-xs-3 col-md-3 o_light_label"/>
+                                        <field name="timeout" class="oe_inline" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label string="Starting Port"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="text-muted">
+                                    Set the start port of build
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16 row">
+                                        <label for="starting_port" string="Port" class="col-xs-3 col-md-3 o_light_label"/>
+                                        <field name="starting_port" class="oe_inline" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label string="Domain"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="text-muted">
+                                    Set the domain of Runbot
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16 row">
+                                        <label for="domain" string="Domain" class="col-xs-3 col-md-3 o_light_label"/>
+                                        <field name="domain" class="oe_inline" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </xpath>
+        </field>
+    </record>
+
+    <record id="action_runbot_configuration" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="base.res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+
+    <menuitem id="menu_runbot_configuration" 
+              name="Settings"
+              sequence="19" 
+              parent="menu_runbot_top"/>
+
+    <menuitem id="menu_sub_runbot_configuration" 
+              name="Settings"
+              sequence="19" 
+              parent="menu_runbot_configuration"
+              action="action_runbot_configuration"/>
+
+</odoo>

@@ -1,25 +1,26 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-import itertools
 import hashlib
+import itertools
+import operator
 from collections import OrderedDict
 
-import operator
 import werkzeug
 from matplotlib.font_manager import FontProperties
 from matplotlib.textpath import TextToPath
 
 from odoo import fields, http
+from odoo.addons.http_routing.models.ir_http import slug
+from odoo.addons.website.controllers.main import QueryURL
 from odoo.http import request
-from odoo.addons.website.models.website import slug
-from odoo.addons.website_sale.controllers.main import QueryURL
+from odoo.tools import ustr
+
 
 def flatten(list_of_lists):
     return list(itertools.chain.from_iterable(list_of_lists))
 
+
 def uniq_list(l):
-    return OrderedDict.fromkeys(l).keys()
+    return list(OrderedDict.fromkeys(l).keys())
+
 
 def s2human(time):
     """Convert a time in second into an human readable string"""
@@ -35,7 +36,9 @@ class RunbotController(http.Controller):
         Branch = request.env['runbot.branch']
         Build = request.env['runbot.build']
         Repo = request.env['runbot.repo']
-        count = lambda dom: Build.search_count(dom)
+
+        def count(dom):
+            return Build.search_count(dom)
 
         repos = Repo.search([])
         if not repo and repos:
@@ -53,9 +56,9 @@ class RunbotController(http.Controller):
 
         build_ids = []
         if repo:
-            filters = {key: post.get(key, '1') for key in ['pending', 'testing', 'running', 'done']}
+            filters = {key: post.get(key, '1') for key in ['pending', 'testing', 'running', 'done', 'deathrow']}
             domain = [('repo_id', '=', repo.id)]
-            domain += [('state', '!=', key) for key, value in filters.iteritems() if value == '0']
+            domain += [('state', '!=', key) for key, value in filters.items() if value == '0']
             if search:
                 domain += ['|', '|', ('dest', 'ilike', search), ('subject', 'ilike', search), ('branch_id.branch_name', 'ilike', search)]
 
@@ -103,8 +106,8 @@ class RunbotController(http.Controller):
                     rec[0]: [r for r in rec[1:] if r is not None] for rec in request.env.cr.fetchall()
                 }
 
-            branches = Branch.browse(branch_ids)
-            build_ids = flatten(build_by_branch_ids.values())
+            branches = Branch.with_context(request.env.context).browse(branch_ids)
+            build_ids = flatten(list(build_by_branch_ids.values()))
             build_dict = {build.id: build for build in Build.browse(build_ids)}
 
             def branch_info(branch):
@@ -114,7 +117,7 @@ class RunbotController(http.Controller):
                 }
 
             context.update({
-                'branches': [branch_info(b) for b in branches],
+                'branches': [branch_info(b) for b in branches if b.id in build_by_branch_ids],
                 'testing': count([('repo_id', '=', repo.id), ('state', '=', 'testing')]),
                 'running': count([('repo_id', '=', repo.id), ('state', '=', 'running')]),
                 'pending': count([('repo_id', '=', repo.id), ('state', '=', 'pending')]),
@@ -161,7 +164,7 @@ class RunbotController(http.Controller):
                     ORDER BY r.sequence, r.name, br.branch_name, bu.id DESC
                    """, [tuple(repos._ids)])
 
-        builds = RB.browse(map(operator.itemgetter(0), cr.fetchall()))
+        builds = RB.browse(list(map(operator.itemgetter(0), cr.fetchall())))
 
         count = RB.search_count
         qctx = {
@@ -216,7 +219,6 @@ class RunbotController(http.Controller):
             'domain': real_build.domain,
             'host': real_build.host,
             'port': real_build.port,
-            'subject': build.subject,
             'server_match': real_build.server_match,
             'duplicate_of': build.duplicate_id if build.state == 'duplicate' else False,
             'coverage': build.branch_id.coverage,
@@ -237,9 +239,9 @@ class RunbotController(http.Controller):
         other_builds = Build.search([('branch_id', '=', build.branch_id.id)])
 
         domain = [('build_id', '=', real_build.id)]
-        #if type:
+        # if type:
         #    domain.append(('type', '=', type))
-        #if level:
+        # if level:
         #    domain.append(('level', '=', level))
         if search:
             domain.append(('message', 'ilike', search))
@@ -252,13 +254,13 @@ class RunbotController(http.Controller):
             'logs': loggings,
             'other_builds': other_builds
         }
-        #context['type'] = type
-        #context['level'] = level
+        # context['type'] = type
+        # context['level'] = level
         return request.render("runbot.build", context)
 
     @http.route(['/runbot/build/<int:build_id>/force'], type='http', auth="public", methods=['POST'], csrf=False)
     def build_force(self, build_id, search=None, **post):
-        repo_id = request.env['runbot.build'].browse([int(build_id)]).force()
+        repo_id = request.env['runbot.build'].browse([int(build_id)])._force()
         return werkzeug.utils.redirect('/runbot/repo/%s' % repo_id + ('?search=%s' % search if search else ''))
 
     @http.route(['/runbot/build/<int:build_id>/kill'], type='http', auth="user", methods=['POST'], csrf=False)
@@ -321,6 +323,7 @@ class RunbotController(http.Controller):
 
         class Text(object):
             __slot__ = ['text', 'color', 'width']
+          
             def __init__(self, text, color):
                 self.text = text
                 self.color = color
@@ -339,7 +342,7 @@ class RunbotController(http.Controller):
         return request.render("runbot.badge_" + theme, data, headers=headers)
 
     @http.route(['/runbot/b/<branch_name>', '/runbot/<model("runbot.repo"):repo>/<branch_name>'], type='http', auth="public", website=True)
-    def fast_launch(self, branch_name=False, repo=False, **post):
+    def fast_launch(self, branch_name=False, repo=None, **post):
         Build = request.env['runbot.build']
 
         domain = [('branch_id.branch_name', '=', branch_name)]
@@ -354,7 +357,7 @@ class RunbotController(http.Controller):
         builds = Build.search(domain, order=order, limit=10)
 
         if builds:
-            last_build = False
+            last_build = None
             for build in builds:
                 if build.state == 'running' or (build.state == 'duplicate' and build.duplicate_id.state == 'running'):
                     last_build = build if build.state == 'running' else build.duplicate_id

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_runbot_top" name="Runbot"/>
+    <menuitem id="menu_runbot" name="Runbot" parent="menu_runbot_top"/>
+
+    <!-- Repos -->
+    <record id="action_repo_form" model="ir.actions.act_window">
+        <field name="name">Repositories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">runbot.repo</field>
+        <field name="view_type">form</field>
+    </record>
+    <menuitem id="menu_repo_form" action="action_repo_form" parent="menu_runbot"/>
+
+    <!-- Branches -->
+    <record id="action_branch" model="ir.actions.act_window">
+        <field name="name">Branches</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">runbot.branch</field>
+        <field name="view_type">form</field>
+    </record>
+    <menuitem id="menu_branch" action="action_branch" parent="menu_runbot"/>
+
+    <!-- Builds -->
+    <record id="action_build" model="ir.actions.act_window">
+        <field name="name">Builds</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">runbot.build</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph,tree,form</field>
+    </record>
+    <menuitem id="menu_build" action="action_build" parent="menu_runbot"/>
+
+    <!-- Events -->
+    <record id="logging_action" model="ir.actions.act_window">
+        <field name="name">Events</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ir.logging</field>
+        <field name="view_type">form</field>
+    </record>
+    <menuitem id="logging_menu" action="logging_action" parent="menu_runbot"/>
+
+    <!-- Website menu -->
+    <record id="website_menu" model="website.menu">
+        <field name="name">Runbot</field>
+        <field name="url">/runbot</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">1</field>
+    </record>
+
+    <!-- Runbot Config -->
+    <record id="action_runbot_configuration" model="ir.actions.act_window">
+        <field name="name">Configure Runbot</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+    <menuitem id="menu_runbot_configuration" name="Configuration" parent="menu_runbot_top" sequence="19" action="action_runbot_configuration"/>
+
+</odoo>

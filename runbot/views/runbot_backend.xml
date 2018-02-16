@@ -218,7 +218,6 @@
     </record>
     <menuitem id="logging_menu" action="logging_action" parent="menu_runbot"/>
 
-
     <!-- Website menu -->
     <record id="website_menu" model="website.menu">
         <field name="name">Runbot</field>
@@ -226,19 +225,5 @@
         <field name="parent_id" ref="website.main_menu"/>
         <field name="sequence" type="int">1</field>
     </record>
-
-<data noupdate="1">
-    <!-- Cron -->
-    <record model="ir.cron" id="repo_cron">
-        <field name='name'>Runbot Cron</field>
-        <field name="model_id" ref="model_runbot_repo"/>
-        <field name="state">code</field>
-        <field name="code">model.cron()</field>
-        <field name='interval_number'>1</field>
-        <field name='interval_type'>minutes</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False" />
-    </record>
-</data>
 
 </odoo>

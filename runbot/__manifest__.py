@@ -1,21 +1,28 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 {
     'name': 'Runbot',
     'category': 'Website',
-    'summary': 'Runbot',
-    'version': '1.3',
-    'description': "Runbot",
+    'summary': 'Odoo Continue Intergration Addon',
+    'version': '11.0.1.0.0',
     'author': 'Odoo SA',
-    'depends': ['website'],
+    'contributors': [
+        'Michell Stuttgart <michellstut@gmail.com>',
+    ],
+    'depends': [
+        'website',
+    ],
     'external_dependencies': {
-        'python': ['matplotlib'],
+        'python': [
+            'matplotlib',
+        ],
     },
     'data': [
-        'views/runbot_backend.xml',
+        'data/ir_cron.xml',
+        'views/runbot.xml',
+        'views/runbot_branch.xml',
+        'views/runbot_build.xml',
+        'views/res_config_settings.xml',
+        'views/runbot_repo.xml',
         'views/runbot_templates.xml',
-        'views/res_config_view.xml',
         'security/runbot_security.xml',
         'security/ir.model.access.csv',
         'security/ir.rule.csv',

@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from . import res_config
 from . import runbot
+from . import runbot_branch
+from . import runbot_build
+from . import runbot_repo
+from . import runbot_event
+from . import res_config

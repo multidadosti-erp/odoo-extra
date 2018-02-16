@@ -16,24 +16,24 @@
                         <label for="id" string="Settings"/>
                         <div>
                             <div>
-                                <field name="default_workers" class="oe_inline"/>
-                                <label for="default_workers"/>
+                                <field name="workers" class="oe_inline"/>
+                                <label for="workers"/>
                             </div>
                             <div>
-                                <field name="default_running_max" class="oe_inline"/>
-                                <label for="default_running_max"/>
+                                <field name="running_max" class="oe_inline"/>
+                                <label for="running_max"/>
                             </div>
                             <div>
-                                <field name="default_timeout" class="oe_inline"/>
-                                <label for="default_timeout"/>
+                                <field name="timeout" class="oe_inline"/>
+                                <label for="timeout"/>
                             </div>
                             <div>
-                                <field name="default_starting_port" class="oe_inline"/>
-                                <label for="default_starting_port"/>
+                                <field name="starting_port" class="oe_inline"/>
+                                <label for="starting_port"/>
                             </div>
                             <div>
-                                <field name="default_domain" class="oe_inline"/>
-                                <label for="default_domain"/>
+                                <field name="domain" class="oe_inline"/>
+                                <label for="domain"/>
                             </div>
                         </div>
                     </group>
