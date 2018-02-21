@@ -1,14 +1,16 @@
 <?xml version="1.0" ?>
-<data noupdate="0">
-    <!-- Cron -->
-    <record id="ir_cron_runbot_repo" forcecreate='True' model="ir.cron">
-        <field name="name">Runbot Repo Cron</field>
-        <field name="active" eval="True"/>
-        <field name="interval_number">1</field>
-        <field name="interval_type">minutes</field>
-        <field name="numbercall">-1</field>
-        <field name="model_id" ref="model_runbot_repo"/>
-        <field name="state">code</field>
-        <field name="code">model._cron()</field>
-    </record>
-</data>
+<odoo>
+    <data noupdate="0">
+        <!-- Cron -->
+        <record id="ir_cron_runbot_repo" forcecreate='True' model="ir.cron">
+            <field name="name">Runbot Repo Cron</field>
+            <field name="active" eval="True"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_runbot_repo"/>
+            <field name="state">code</field>
+            <field name="code">model._cron()</field>
+        </record>
+    </data>
+</odoo>
