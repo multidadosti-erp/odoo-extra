@@ -35,9 +35,9 @@
                                     Set the max number of running buids
                                 </div>
                                 <div class="content-group">
-                                    <div class="mt16" groups="base.group_no_one">
+                                    <div class="mt16 row">
                                         <label for="running_max" string="Max builds" class="col-xs-3 col-md-3 o_light_label"/>
-                                        <field name="running_max" class="oe_inline"/>
+                                        <field name="running_max" class="oe_inline" required="1"/>
                                     </div>
                                 </div>
                             </div>
