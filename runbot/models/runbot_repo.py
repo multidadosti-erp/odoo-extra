@@ -308,7 +308,7 @@ class RunbotRepo(models.Model):
     def _scheduler(self):
         get_param = self.env['ir.config_parameter'].get_param
         workers = int(get_param('runbot.workers', default=6))
-        running_max = int(icp.get_param(cr, uid, 'runbot.running_max', default=75))
+        running_max = int(get_param('runbot.running_max', default=75))
         host = fqdn()
 
         Build = self.env['runbot.build']
@@ -366,12 +366,13 @@ class RunbotRepo(models.Model):
             else:
                 non_sticky.append(build.id)
 
-        build_ids = sticky.values()
+        build_ids = list(sticky.values())
         build_ids += non_sticky
 
         # terminate extra running builds
-        Build._kill(build_ids[running_max:])
-        Build._reap(build_ids)
+        build = Build.browse(build_ids[running_max:])
+        build._kill()
+        build._reap()
 
     @api.model
     def _reload_nginx(self):
