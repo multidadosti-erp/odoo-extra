@@ -382,6 +382,7 @@ class RunbotBuild(models.Model):
             'note_pad',
             'pos_cache',
             'pos_blackbox_be',
+            'web_favicon',
         ])
 
         def mod_filter(m): return (
