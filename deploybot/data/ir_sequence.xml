@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="ir_sequence_deploy_event" model="ir.sequence">
+            <field name="name">Deploy Event Sequence</field>
+            <field name="code">deploy.event.sequence</field>
+            <field name="prefix">Event </field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

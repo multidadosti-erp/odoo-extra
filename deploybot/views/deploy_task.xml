@@ -1,0 +1,52 @@
+<odoo>
+
+    <record id="deploy_task_view_form" model="ir.ui.view">
+        <field name="name">deploy.task.view.form</field>
+        <field name="model">deploy.task</field>
+        <field name="arch" type="xml">
+            <form string="Task">
+                <header>
+                    <button name="action_start_deploy" string="Start Deploy" class="oe_highlight" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Instances" name="instances_page">
+                            <field name="instance_ids">
+                                <tree>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="host"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Recipes" name="recipes_page">
+                            <field name="recipe_ids">
+                                <tree>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- deploy.task action window -->
+    <record id="deploy_task_action" model="ir.actions.act_window">
+        <field name="name">Tasks</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">deploy.task</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="deploy_task_menu_act" name="Task" parent="deploybot.deploy_menu_categ" action="deploy_task_action" sequence="1"/>
+
+</odoo>

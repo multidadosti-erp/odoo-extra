@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_deploy_event,deploy.event,model_deploy_event,base.group_user,1,1,1,1
+access_deploy_instance,deploy.instance,model_deploy_instance,base.group_user,1,1,1,1
+access_deploy_recipe,deploy.recipe,model_deploy_recipe,base.group_system,1,1,1,1
+access_deploy_task,deploy.task,model_deploy_task,base.group_user,1,1,1,1

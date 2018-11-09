@@ -1,0 +1,61 @@
+<odoo>
+
+    <!-- deploy.event tree view -->
+    <record id="deploy_event_view_tree" model="ir.ui.view">
+        <field name="name">deploy.event.view.tree</field>
+        <field name="model">deploy.event</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'success'" decoration-danger="state == 'error'" string="Events">
+                <field name="name"/>
+                <field name="task_id"/>
+                <field name="instance_id"/>
+                <field name="recipe_id"/>
+                <field name="start_datetime"/>
+                <field name="finish_datetime"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- deploy.event form view -->
+    <record id="deploy_event_view_form" model="ir.ui.view">
+        <field name="name">deploy.event.view.form</field>
+        <field name="model">deploy.event</field>
+        <field name="arch" type="xml">
+            <form string="Events">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="task_id"/>
+                        <field name="instance_id"/>
+                        <field name="recipe_id"/>
+                        <field name="start_datetime"/>
+                        <field name="finish_datetime"/>
+                    </group>
+                    <notebook>
+                        <page string="Output" name="output_page">
+                            <separator/>
+                            <field name="output"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- deploy.event action window -->
+    <record id="deploy_event_action" model="ir.actions.act_window">
+        <field name="name">Events</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">deploy.event</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="deploy_event_menu_act" name="Event" parent="deploybot.deploy_menu_categ" action="deploy_event_action" sequence="4"/>
+
+</odoo>

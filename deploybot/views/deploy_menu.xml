@@ -1,0 +1,9 @@
+<odoo>
+
+  <!-- Top menu item -->
+  <menuitem id="deploybot_menu_root" name="DeployBot" sequence="1"/>
+
+  <!-- menu categories -->
+  <menuitem id="deploy_menu_categ" name="Deploy" parent="deploybot.deploybot_menu_root" sequence="1"/>
+
+</odoo>

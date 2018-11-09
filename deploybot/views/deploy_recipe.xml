@@ -1,0 +1,55 @@
+<odoo>
+
+    <!-- deploy.recipe form view -->
+    <record id="deploy_recipe_view_form" model="ir.ui.view">
+        <field name="name">deploy.recipe.view.form</field>
+        <field name="model">deploy.recipe</field>
+        <field name="arch" type="xml">
+            <form string="Recipe">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Architecture">
+                            <field name="code" widget="ace" options="{'mode': 'python'}"/>
+                        </page>
+                        <page string="Help">
+                            <group>
+                                <div style="margin-top: 4px;">
+                                        <h3>Help with Python expressions</h3>
+                                        <p>The following variables can be used:</p>
+                                        <ul>
+                                            <li><code>instance</code>: Instance object</li>
+                                        </ul>
+                                        <div>
+                                            <p>Example of Python code</p>
+<code style='white-space: pre-wrap'>
+from fabric.api import sudo
+
+def deploy():
+    sudo('service {{ instance.service }} stop')
+</code>
+                                        </div>
+                                    </div>
+                                </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- deploy.recipe action window -->
+    <record id="deploy_recipe_action" model="ir.actions.act_window">
+        <field name="name">Recipes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">deploy.recipe</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="deploy_recipe_menu_act" name="Recipe" parent="deploybot.deploy_menu_categ" action="deploy_recipe_action" sequence="3"/>
+
+</odoo>
