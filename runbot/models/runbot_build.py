@@ -383,6 +383,7 @@ class RunbotBuild(models.Model):
             'pos_cache',
             'pos_blackbox_be',
             'web_favicon',
+            'test_pylint',
         ])
 
         def mod_filter(m): return (
