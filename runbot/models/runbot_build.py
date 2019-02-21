@@ -384,6 +384,8 @@ class RunbotBuild(models.Model):
             'pos_blackbox_be',
             'web_favicon',
             'test_pylint',
+            'pi_open_in_new_tab',
+            'web_responsive_multidados',
         ])
 
         def mod_filter(m): return (
