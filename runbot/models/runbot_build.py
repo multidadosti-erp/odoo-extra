@@ -386,6 +386,7 @@ class RunbotBuild(models.Model):
             'test_pylint',
             'pi_open_in_new_tab',
             'web_responsive_multidados',
+            'print_view',
         ])
 
         def mod_filter(m): return (
