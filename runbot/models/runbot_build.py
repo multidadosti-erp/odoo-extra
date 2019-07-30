@@ -619,7 +619,7 @@ class RunbotBuild(models.Model):
 
             status = {
                 "state": state,
-                "target_url": "http://%s:8069/runbot/build/%s" % (runbot_domain,
+                "target_url": "http://%s/runbot/build/%s" % (runbot_domain,
                                                                   build.id),
                 "description": desc,
                 "context": "ci/runbot"
