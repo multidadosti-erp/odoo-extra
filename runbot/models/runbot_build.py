@@ -817,7 +817,8 @@ class RunbotBuild(models.Model):
                 port = self._find_port()
 
                 build.write({
-                    'host': fqdn(),
+                    # 'host': fqdn(),
+                    'host': self.env['runbot.repo']._domain(),
                     'port': port,
                     'state': 'testing',
                     'job': jobs[0],
@@ -951,7 +952,8 @@ class RunbotBuild(models.Model):
                 self._local_pg_dropdb(db)
 
     def _kill(self, result=None):
-        host = fqdn()
+        # host = fqdn()
+        host = self.env['runbot.repo']._domain()
         for build in self:
             if build.host != host:
                 continue
