@@ -18,7 +18,7 @@
                         <field name="mode"/>
                         <field name="nginx"/>
                         <field name="duplicate_id"/>
-                        <field name="dependency_ids" widget="many2many_tags"/>
+                        <field name="dependency_ids"/>
                         <field name="modules"/>
                         <field name="modules_auto"/>
                         <field name="token"/>
