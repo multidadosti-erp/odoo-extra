@@ -47,6 +47,7 @@ _re_coverage = re.compile(r'\bcoverage\b')
 
 class RunbotBuild(models.Model):
     _name = "runbot.build"
+    _description = 'Runbot Build'
     _order = 'id desc'
 
     SERVER_MATCH_SELECT = [

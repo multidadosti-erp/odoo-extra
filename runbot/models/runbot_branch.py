@@ -11,6 +11,7 @@ _re_coverage = re.compile(r'\bcoverage\b')
 
 class RunbotBranch(models.Model):
     _name = "runbot.branch"
+    _description = 'Runbot Branch'
     _order = 'name'
 
     repo_id = fields.Many2one('runbot.repo',

@@ -22,6 +22,7 @@ _logger = logging.getLogger(__name__)
 
 class RunbotRepo(models.Model):
     _name = "runbot.repo"
+    _description = 'Runbot Repo'
     _order = 'sequence, name, id'
 
     MODULES_AUTO = [('none', 'None (only explicit modules list)'),

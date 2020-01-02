@@ -19,7 +19,7 @@ _logger = logging.getLogger(__name__)
 # improve throughput with many workers
 # TODO: find a nicer way than monkey patch to accomplish this
 odoo.service.server.SLEEP_INTERVAL = 10
-odoo.addons.base.ir.ir_cron._intervalTypes['minutes'] = (lambda interval: relativedelta(seconds=interval * 10))
+odoo.addons.base.models.ir_cron._intervalTypes['minutes'] = (lambda interval: relativedelta(seconds=interval * 10))
 
 # ----------------------------------------------------------
 # RunBot helpers

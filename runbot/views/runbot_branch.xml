@@ -36,11 +36,11 @@
             <search string="Search builds">
                 <field name="name"/>
                 <field name="state"/>
-                <filter string="Sticky" domain="[('sticky','=', True)]"/>
+                <filter name="sticky" string="Sticky" domain="[('sticky','=', True)]"/>
                 <separator />
                 <group expand="0" string="Group By...">
-                    <filter string="Repo" domain="[]" context="{'group_by':'repo_id'}"/>
-                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    <filter name="repo" string="Repo" domain="[]" context="{'group_by':'repo_id'}"/>
+                    <filter name="status" string="Status" domain="[]" context="{'group_by':'state'}"/>
                 </group>
             </search>
         </field>

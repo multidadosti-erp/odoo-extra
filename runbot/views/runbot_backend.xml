@@ -87,11 +87,11 @@
             <search string="Search builds">
                 <field name="name"/>
                 <field name="state"/>
-                <filter string="Sticky" domain="[('sticky','=', True)]"/>
+                <filter name="sticky" string="Sticky" domain="[('sticky','=', True)]"/>
                 <separator />
                 <group expand="0" string="Group By...">
-                    <filter string="Repo" domain="[]" context="{'group_by':'repo_id'}"/>
-                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    <filter name="repo" string="Repo" domain="[]" context="{'group_by':'repo_id'}"/>
+                    <filter name="status" string="Status" domain="[]" context="{'group_by':'state'}"/>
                 </group>
             </search>
         </field>
@@ -181,21 +181,21 @@
                 <field name="state"/>
                 <field name="dest"/>
                 <separator/>
-                <filter string="Pending" domain="[('state','=', 'pending')]"/>
-                <filter string="Testing" domain="[('state','=', 'testing')]"/>
-                <filter string="Running" domain="[('state','=', 'running')]"/>
-                <filter string="Done" domain="[('state','=','done')]"/>
-                <filter string="Duplicate" domain="[('state','=', 'duplicate')]"/>
-                <filter string="Deathrow" domain="[('state','=', 'deathrow')]"/>
+                <filter name="pending" string="Pending" domain="[('state','=', 'pending')]"/>
+                <filter name="testing" string="Testing" domain="[('state','=', 'testing')]"/>
+                <filter name="running" string="Running" domain="[('state','=', 'running')]"/>
+                <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                <filter name="duplicate" string="Duplicate" domain="[('state','=', 'duplicate')]"/>
+                <filter name="deathrow" string="Deathrow" domain="[('state','=', 'deathrow')]"/>
                 <separator />
                 <group expand="0" string="Group By...">
-                    <filter string="Repo" domain="[]" context="{'group_by':'repo_id'}"/>
-                    <filter string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
-                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
-                    <filter string="Result" domain="[]" context="{'group_by':'result'}"/>
-                    <filter string="Start" domain="[]" context="{'group_by':'job_start'}"/>
-                    <filter string="Host" domain="[]" context="{'group_by':'host'}"/>
-                    <filter string="Create Date" domain="[]" context="{'group_by':'create_date'}"/>
+                    <filter name="repo" string="Repo" domain="[]" context="{'group_by':'repo_id'}"/>
+                    <filter name="branch" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                    <filter name="status" string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    <filter name="result" string="Result" domain="[]" context="{'group_by':'result'}"/>
+                    <filter name="start" string="Start" domain="[]" context="{'group_by':'job_start'}"/>
+                    <filter name="host" string="Host" domain="[]" context="{'group_by':'host'}"/>
+                    <filter name="create_date" string="Create Date" domain="[]" context="{'group_by':'create_date'}"/>
                 </group>
             </search>
         </field>

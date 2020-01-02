@@ -5,7 +5,7 @@ from odoo import api, fields, models
 _logger = logging.getLogger(__name__)
 
 
-class RunbotEvent(models.Model):
+class IrLogging(models.Model):
     _inherit = 'ir.logging'
 
     TYPES = [
@@ -24,7 +24,7 @@ class RunbotEvent(models.Model):
 
     @api.model_cr
     def init(self):
-        super(RunbotEvent, self).init()
+        super(IrLogging, self).init()
         self._cr.execute("""
 CREATE OR REPLACE FUNCTION runbot_set_logging_build() RETURNS TRIGGER AS $$
 BEGIN
