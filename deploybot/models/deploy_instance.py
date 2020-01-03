@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class DeployInstance(models.Model):
     _name = 'deploy.instance'
+    _description = 'Deploy Instance'
 
     name = fields.Char(string='Name', required=True)
     user = fields.Char(string='User')

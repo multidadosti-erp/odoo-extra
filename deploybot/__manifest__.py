@@ -1,6 +1,6 @@
 {
     'name': 'Deploy Bot',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'summary': 'Deploy Bot to update Odoo instancies',
     'category': 'Extra Tools',
     'author': 'MultidadosTI',
@@ -27,7 +27,7 @@
         'data/ir_sequence.xml',
         'security/ir.model.access.csv',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': True,
 }

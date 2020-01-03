@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class DeployRecipe(models.Model):
     _name = 'deploy.recipe'
+    _description = 'Deploy Recipe'
 
     name = fields.Char(string='Name', required=True)
     code = fields.Text(string='Code', required=True)
