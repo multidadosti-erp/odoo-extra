@@ -93,7 +93,7 @@ def now():
 def dt2time(datetime):
     """Convert datetime to time"""
     return time.mktime(time.strptime(
-        datetime, odoo.tools.DEFAULT_SERVER_DATETIME_FORMAT))
+        fields.Datetime.to_string(datetime), odoo.tools.DEFAULT_SERVER_DATETIME_FORMAT))
 
 
 def decode_utf(field):
