@@ -723,8 +723,7 @@ class RunbotBuild(models.Model):
         log_all = build._path('logs', 'job_20_test_all.txt')
         log_time = time.localtime(os.path.getmtime(log_all))
         v = {
-            'job_end': time.strftime(odoo.tools.DEFAULT_SERVER_DATETIME_FORMAT,
-                                     log_time),
+            'job_end': fields.Datetime.to_datetime(time.strftime(odoo.tools.DEFAULT_SERVER_DATETIME_FORMAT, log_time)), # noqa
         }
         if grep(log_all, ".modules.loading: Modules loaded."):
             if rfind(log_all, _re_error):

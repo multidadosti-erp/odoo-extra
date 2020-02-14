@@ -87,7 +87,7 @@ def run(l, env=None):
 
 
 def now():
-    return fields.Datetime.now()
+    return fields.Datetime.to_string(fields.Datetime.now())
 
 
 def dt2time(datetime):
