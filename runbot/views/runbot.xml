@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_runbot_top" name="Runbot"/>
+    <menuitem id="menu_runbot_top" name="Runbot" web_icon="runbot,static/description/icon.png"/>
     <menuitem id="menu_runbot" name="Runbot" parent="menu_runbot_top"/>
 
     <!-- Repos -->
