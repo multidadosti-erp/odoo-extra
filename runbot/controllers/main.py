@@ -38,9 +38,9 @@ class RunbotController(http.Controller):
         Repo = request.env['runbot.repo']
 
         def count(dom):
-            return Build.search_count(dom)
+            return Build.sudo().search_count(dom)
 
-        repos = Repo.search([])
+        repos = Repo.sudo().search([])
         if not repo and repos:
             repo = repos[0]
 
@@ -128,7 +128,7 @@ class RunbotController(http.Controller):
         # consider host gone if no build in last 100
         build_threshold = max(build_ids or [0]) - 100
 
-        for result in Build.read_group([('id', '>', build_threshold)], ['host'], ['host']):
+        for result in Build.sudo().read_group([('id', '>', build_threshold)], ['host'], ['host']):
             if result['host']:
                 context['host_stats'].append({
                     'host': result['host'],
@@ -323,7 +323,7 @@ class RunbotController(http.Controller):
 
         class Text(object):
             __slot__ = ['text', 'color', 'width']
-          
+
             def __init__(self, text, color):
                 self.text = text
                 self.color = color
